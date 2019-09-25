@@ -10,7 +10,7 @@ app.use(router);
 router.get('/get', (req,res) => {
     console.log(req.headers);
     res.header({
-        "custom-header":"Nuestro valor personalizado"
+        "custom-header":"Nuestro valor personalizado",
     });
     res.send('Hola desde get');
 });
@@ -22,7 +22,8 @@ router.post('/post', (req,res) => {
 router.delete('/delete', (req,res) => {
     console.log(req.query);
     console.log(req.body);
-    res.send(`Mensaje ${req.body.text} añadido correctamente`);
+    // res.send(`Mensaje ${req.body.text} añadido correctamente`);
+    res.status(201).send({error:'None',message:"I'M alive in your body :^) "})
 });
 
 // app.use('/', (req, res) => {
