@@ -22,7 +22,7 @@ router.post('/post', (req,res) => {
     // res.send('Hola desde Post');
     console.log(req.query);
     if(req.query.error == 'ok'){
-        response.error(req,res, 'Error simulado', 400);
+        response.error(req,res, 'Error inesperado', 500, 'Es solo una simulacion de los errores');
     }else{
         response.success(req,res, 'Creado Correctamente', 201);
     }
