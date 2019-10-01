@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const response = require('../../network/response');
+const controller = require('./controller');
 
 router.get('/get', (req,res) => {
     console.log(req.headers);
@@ -14,12 +15,15 @@ router.get('/get', (req,res) => {
 
 router.post('/post', (req,res) => {
     // res.send('Hola desde Post');
-    console.log(req.query);
-    if(req.query.error == 'ok'){
-        response.error(req,res, 'Error inesperado', 500, 'Es solo una simulacion de los errores');
-    }else{
+    
+    controller.addMessage(req.body.user, req.body.Message)
+    .then( () => {
         response.success(req,res, 'Creado Correctamente', 201);
-    }
+    })
+    .catch( () => {
+        response.error(req,res, 'Informacion invalida', 500, 'Error en el controlador para logearse');
+    });
+
 });
 
 router.delete('/delete', (req,res) => {
