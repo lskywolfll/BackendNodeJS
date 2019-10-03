@@ -1,16 +1,5 @@
 //falsear la base de datos (MOK)
-const db = require('mongoose');
 const Model = require('./model');
-
-db.Promise = global.Promise;
-//Conexion con base de datos mongoose
-//mongodb+srv://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME
-db.connect('mongodb+srv://db_user_sky:1llD1UgBueud8bAj@cluster0-b0vhf.mongodb.net/telegrom_db', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-console.log('[db] Conectada con exito');
 
 function addMessage(message){
     const myMessage = new Model(message);

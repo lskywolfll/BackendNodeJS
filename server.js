@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const db = require('./db');
+db('mongodb+srv://db_user_sky:1llD1UgBueud8bAj@cluster0-b0vhf.mongodb.net/telegrom_db');
 // const router = require('./components/message/network');
 const router = require('./network/routes');
 const response = require('./network/response');
