@@ -42,12 +42,14 @@ router.patch('/:id', (req,res) => {
     });
 });
 
-router.delete('/delete', (req,res) => {
-    console.log(req.query);
-    console.log(req.body);
-    // res.send(`Mensaje ${req.body.text} añadido correctamente`);
-    // res.status(201).send({error:'None',message:"I'M alive in your body :^) "})
-    response.success(req,res, 'Creado Correctamente', 201);
+router.delete('/:id', (req, res) => {
+    controller.deleteMessage(req.params.id)
+    .then( () => {
+        response.success(req,res, `Usuario eliminado`, 200);
+    })
+    .catch( (e) => {
+        response.error(req, res, 'Error interno', 500, e);
+    });
 });
 
 module.exports = router;

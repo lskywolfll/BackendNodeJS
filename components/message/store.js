@@ -36,10 +36,18 @@ async function updateText(id, message){
     return newMessage;
 }
 
+function removeMessage(id){
+    return Model.deleteOne({
+        _id:id
+    });
+}
+
 module.exports = {
+    //funciones que se usan en el controlador, palabra clave: funcion a la cual se hace referencia
     add: addMessage,
     list: getMessages,
     updateText: updateText,
+    remove: removeMessage,
     //get para recibir un mensaje especifico
     //update para actualizar un mensaje
     //delete para eliminar un mensaje especifico

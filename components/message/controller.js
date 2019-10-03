@@ -1,8 +1,8 @@
 const store = require('./store');
 
 function addMessage(user, message) {
-    return new Promise( (resolve, reject) => {
-        if(!user || !message){
+    return new Promise((resolve, reject) => {
+        if (!user || !message) {
             console.err('[messageController] no hay usuario o mensaje');
             reject('Los datos son incorrectos');
             return false;
@@ -20,16 +20,16 @@ function addMessage(user, message) {
     });
 }
 
-function getMessages(filterUser){
-    return new Promise( (resolve,reject) => {
+function getMessages(filterUser) {
+    return new Promise((resolve, reject) => {
         resolve(store.list(filterUser));
     });
 }
 
-function updateMessage(id, message){
-    return new Promise(async (resolve,reject) => {
+function updateMessage(id, message) {
+    return new Promise(async (resolve, reject) => {
 
-        if(!id || !message){
+        if (!id || !message) {
             reject('Invalid data');
             return false;
         }
@@ -40,8 +40,26 @@ function updateMessage(id, message){
     });
 }
 
+function deleteMessage(id) {
+    return new Promise((resolve, reject) => {
+        if (!id) {
+            reject('Id invalido');
+            return false;
+        }
+        //Cuidado con el identado cuando estamos recibiendo promesas!!
+        store.remove(id)
+            .then(() => {
+                resolve();
+            })
+            .catch((e) => {
+                reject(e);
+            });
+    });
+}
+
 module.exports = {
     addMessage,
     getMessages,
     updateMessage,
+    deleteMessage,
 }
