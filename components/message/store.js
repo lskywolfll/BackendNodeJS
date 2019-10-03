@@ -13,14 +13,18 @@ db.connect('mongodb+srv://db_user_sky:1llD1UgBueud8bAj@cluster0-b0vhf.mongodb.ne
 console.log('[db] Conectada con exito');
 
 function addMessage(message){
-    // list.push(message);
     const myMessage = new Model(message);
     myMessage.save();
 }
 
-async function getMessages(){
-    //return 'list';
-    const messages = await Model.find();
+async function getMessages(filterUser){
+    let filter = {};
+
+    if(filterUser != null){
+        filter = { user: filterUser }
+    }
+
+    const messages = await Model.find(filter);
     return messages;
 }
 

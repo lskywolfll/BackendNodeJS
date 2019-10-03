@@ -5,7 +5,10 @@ const response = require('../../network/response');
 const controller = require('./controller');
 
 router.get('/get', (req,res) => {
-    controller.getMessages()
+    // req.query(consulta).propiedad que exigimos en la url, con el || nosotros le indicamos un valor por defecto en caso este no pósea nada y le asignaremos un valor por defecto
+    const filterMessages = req.query.user || null;
+
+    controller.getMessages(filterMessages)
     .then( (messageList) => {
         response.success(req,res, messageList, 200);
     })
@@ -16,7 +19,8 @@ router.get('/get', (req,res) => {
 
 router.post('/post', (req,res) => {
     // res.send('Hola desde Post');
-    
+    // console.log(`[user]: ${req.body.user} [message]: ${req.body.Message}`)
+    //Tener ojo con los req.body.name ya que el name es donde nosotros vamos a exigir un dato con el nombre especifico que le hayamos indicado en el cuerpo
     controller.addMessage(req.body.user, req.body.Message)
     .then( () => {
         response.success(req,res, 'Creado Correctamente', 201);
