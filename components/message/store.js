@@ -24,11 +24,21 @@ async function getMessages(){
     return messages;
 }
 
+async function updateText(id, message){
+    const foundMessage = await Model.findById(id);
+    foundMessage.message = message;
+
+    const newMessage = await foundMessage.save();
+    return newMessage;
+}
+
 module.exports = {
     add: addMessage,
     list: getMessages,
+    updateText: updateText,
     //get para recibir un mensaje especifico
     //update para actualizar un mensaje
     //delete para eliminar un mensaje especifico
     //create para añadir un mensaje espefico
+    //patch sirve para modificar datos
 }

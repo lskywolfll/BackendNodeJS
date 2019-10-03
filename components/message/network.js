@@ -26,6 +26,17 @@ router.post('/post', (req,res) => {
     });
 
 });
+//patch para hacer modificaciones parciales, si ponemos :nombre estaremos indicando que esperaremos un dato desde la url(param)
+router.patch('/:id', (req,res) => {
+
+    controller.updateMessage(req.params.id, req.body.text)
+    .then( (data) => {
+        response.success(req, res, data, 200)
+    })
+    .catch(e => {
+        response.error(req, res, 'Error interno', 500, e);
+    });
+});
 
 router.delete('/delete', (req,res) => {
     console.log(req.query);
