@@ -14,10 +14,10 @@ router.post('/', (req, res) => {
         });
 });
 
-router.get('/', (req, res) => {
+router.get('/Users', (req, res) => {
     const filterUsers = req.body.name || null;
 
-    controller.addUser(filterUsers)
+    controller.getUsers(filterUsers)
         .then( (listUsers) => {
             response.success(req, res, listUsers, 201);
         })
