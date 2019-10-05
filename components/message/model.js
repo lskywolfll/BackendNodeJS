@@ -16,6 +16,7 @@ const mySchema = new Schema({
         required: true,
     },
     date: Date,
+    file: String,
 });
 //Nombre de la tabla, esquema de los datos
 const model = mongoose.model('Messages', mySchema);

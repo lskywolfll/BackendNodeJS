@@ -8,9 +8,9 @@ const controller = require('./controller');
 
 const storage = multer.diskStorage({
     //guardar el archivo
-    // dest: 'uploads/',
+    // dest: 'public/uploads/',
     destination: (req, file, cb) => {
-        cb(null, 'uploads/')
+        cb(null, 'public/uploads/')
     },
     filename: (req, file, cb) => {
         // extension scope for type files
@@ -35,10 +35,12 @@ router.get('/get', (req,res) => {
 });
 //middleware es un punto donde entrara anes de acceder a nuestra funcion
 router.post('/post',upload.single('File'), (req,res) => {
+
+    console.log(req.file);
     // res.send('Hola desde Post');
     // console.log(`[user]: ${req.body.user} [message]: ${req.body.Message}`)
     //Tener ojo con los req.body.name ya que el name es donde nosotros vamos a exigir un dato con el nombre especifico que le hayamos indicado en el cuerpo
-    controller.addMessage(req.body.chat, req.body.user,  req.body.Message)
+    controller.addMessage(req.body.chat, req.body.user,  req.body.Message, req.file)
     .then( () => {
         response.success(req,res, 'Creado Correctamente', 201);
     })
