@@ -1,22 +1,22 @@
 const express = require('express');
+const app = express();
+const server = require('http').Server(app);
 const bodyParser = require('body-parser');
+const socket = require('./socket');
 const db = require('./db');
 db('mongodb+srv://db_user_sky:1llD1UgBueud8bAj@cluster0-b0vhf.mongodb.net/telegrom_db');
 // const router = require('./components/message/network');
 const router = require('./network/routes');
 const response = require('./network/response');
 
-var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-// app.use(router);
+
+socket.connect(server);
 router(app);
-// Ejemplo de servicio http con url y respuesta
-// app.use('/', (req, res) => {
-//     res.send('Hola');
-// });
 
 app.use('/app', express.static('public'));
 
-app.listen(3000);
-console.log('La aplicacion esta escuchando en http://localhost:3000');
+server.listen(3000, () => {
+    console.log('La aplicacion esta escuchando en http://localhost:3000');
+});

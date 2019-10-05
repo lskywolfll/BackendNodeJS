@@ -26,6 +26,7 @@
     "chalk": "^2.4.2",
     "express": "^4.17.1",
     "mongoose": "^5.7.3",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0"
   }
 }
