@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
+
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
 const db = require('./db');
@@ -8,6 +10,8 @@ db('mongodb+srv://db_user_sky:1llD1UgBueud8bAj@cluster0-b0vhf.mongodb.net/telegr
 // const router = require('./components/message/network');
 const router = require('./network/routes');
 const response = require('./network/response');
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

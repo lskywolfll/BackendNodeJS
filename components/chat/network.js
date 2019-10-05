@@ -3,23 +3,24 @@ const router = express.Router();
 const response = require('../../network/response');
 const controller = require('./controller');
 
-router.get('/', (req,res) => {
+router.post('/', (req,res) => {
 
-    controller.getChats()
+    controller.addChat()
     .then(( chats ) => {
-        response.success(req, res, chats, 200);
+        response.success(req, res, 'Ingresado correctamente', 200);
     }).catch( e => {
-        response.error(req, res, 'Inexpected Error', 500, e);
+        
+        response.error('Informacion Invalida', 500, 'Error en el controlador para crear un chat');
     });
 });
 
-router.post('/:userId', (req,res) => {
+router.get('/:userId', (req,res) => {
 
-    controller.listChats(req.params.userId)
-    .then( () => {
-        response.success(req, res, 'Creado Correctamente', 201);
+    controller.getChats(req.params.userId)
+    .then( chats => {
+        response.success(req, res, chats, 201);
     }).catch(e => {
-        response.error(req, res, 'Informacion Invalida', 500, 'Error en el controlador para crear un chat');
+        response.error(req, res, 'Inexpected Error', 500, e);
     });
 });
 
