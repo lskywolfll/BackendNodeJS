@@ -5,12 +5,12 @@ const multer = require('multer');
 const router = express.Router();
 const response = require('../../network/response');
 const controller = require('./controller');
-
+const config = require('../../config');
 const storage = multer.diskStorage({
     //guardar el archivo
     // dest: 'public/uploads/',
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads/')
+        cb(null, `public/${config.filesRoute}/`)
     },
     filename: (req, file, cb) => {
         // extension scope for type files
