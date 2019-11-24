@@ -1,11 +1,12 @@
 // Estaran las rutas y encargada de recibir las rutas http e procesarlas por el controlador
 const express = require('express');
 const multer = require('multer');
-
 const router = express.Router();
+//Capas
 const response = require('../../network/response');
 const controller = require('./controller');
 const config = require('../../config');
+//Archivos
 const storage = multer.diskStorage({
     //guardar el archivo
     // dest: 'public/uploads/',
@@ -20,6 +21,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+// Apis
 
 router.get('/get', (req,res) => {
     // req.query(consulta).propiedad que exigimos en la url, con el || nosotros le indicamos un valor por defecto en caso este no pósea nada y le asignaremos un valor por defecto
@@ -39,7 +42,7 @@ router.post('/post',upload.single('File'), (req,res) => {
     console.log(req.file);
     // res.send('Hola desde Post');
     // console.log(`[user]: ${req.body.user} [message]: ${req.body.Message}`)
-    //Tener ojo con los req.body.name ya que el name es donde nosotros vamos a exigir un dato con el nombre especifico que le hayamos indicado en el cuerpo
+    //Tener ojo con los req.body.name ya que el name es donde nosotros vamos a exigir un dato con el nombre especifico que le hayamos indicado en el cuerpo y o por parametro
     controller.addMessage(req.body.chat, req.body.user,  req.body.Message, req.file)
     .then( () => {
         response.success(req,res, 'Creado Correctamente', 201);

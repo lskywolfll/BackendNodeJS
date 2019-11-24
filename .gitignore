@@ -2,3 +2,5 @@
 
 # dependencies en carpetas
 /node_modules
+#configuraciones de conexion
+config.js

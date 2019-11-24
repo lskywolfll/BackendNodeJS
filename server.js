@@ -9,7 +9,7 @@ const db = require('./db');
 const config = require('./config');
 // const router = require('./components/message/network');
 const router = require('./network/routes');
-const response = require('./network/response');
+// const response = require('./network/response');
 
 db(config.dbUrl);
 
